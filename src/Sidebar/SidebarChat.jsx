@@ -4,8 +4,8 @@ import "./sidebarChat.css";
 
 const SidebarChat = ({ name, mobile, id, setActiveContact }) => {
   const showIt = (id) => {
-    setActiveContact(id);
-    localStorage.setItem("contact", id);
+    setActiveContact(mobile);
+    localStorage.setItem("contact", mobile);
   };
 
   // Generate a random seed

@@ -92,7 +92,7 @@ const Sidebar = ({ setActiveContact, db }) => {
       alert("user not found");
     } else {
       setAdminUser(user[0]);
-      localStorage.setItem("userId", user[0].id);
+      localStorage.setItem("userId", user[0].mobile);
       setLoginModel(false);
     }
 
@@ -195,6 +195,7 @@ const Sidebar = ({ setActiveContact, db }) => {
       <div className="sidebar">
         <div className="sidebar__header">
           <Avatar src={adminUser?.imgUrl} />
+          <h2>{adminUser?.mobile}</h2>
           <div className="sidebar__headerRight">
             <IconButton>
               <DonutLargeIcon />

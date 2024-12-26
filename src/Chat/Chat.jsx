@@ -32,10 +32,12 @@ function Chat({ db, activeContact }) {
 
   useEffect(() => {
     const activeMessage = data?.messages.filter(
-      (msg) => msg.contactId === activeContact || message.contactId === userId
+      (msg) =>
+        (msg.senderId === userId && msg.contactId === activeContact) ||
+        (msg.senderId === activeContact && msg.contactId === userId)
     );
     const activeContactDetails = data?.contact.filter(
-      (contact) => contact.id === activeContact
+      (contact) => contact.mobile === activeContact
     )[0];
     setMessage(activeMessage || []);
     setcontactDetails(activeContactDetails);
@@ -81,11 +83,13 @@ function Chat({ db, activeContact }) {
         message: input,
         timestamp: Date.now(),
         status: "sent",
-        contactId: activeContact,
+        contactId: contactDetails.mobile,
         recieved: false,
         senderId: userId,
       })
     );
+
+    console.log("submitted");
 
     setInput("");
   };
@@ -104,6 +108,7 @@ function Chat({ db, activeContact }) {
         <Avatar src={contactDetails?.imgUrl} />
         <div className="chat__headerInfo">
           <h3>{contactDetails?.name}</h3>
+          <p>{contactDetails?.mobile}</p>
         </div>
 
         <div className="chat__headerRight">
